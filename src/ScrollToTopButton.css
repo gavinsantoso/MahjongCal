@@ -1,0 +1,29 @@
+/* Add CSS for ScrollToTopButton */
+.scroll-to-top-button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 20px; /* Adjust the size as needed */
+  width: 50px;
+  height: 40px;
+  padding: 0px;
+}
+
+.scroll-to-top-button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+.scroll-to-top-button.visible {
+  display: block;
+}
+
+/* Style the button as needed */

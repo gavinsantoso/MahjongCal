@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TableWithToggle.css'; // Import the CSS file
+import ScoreMapping from './ScoreMapping.json';
+import ScrollToTopButton from './ScrollToTopButton'
 
 const TableWithToggle = () => {
   const [jsonData, setJsonData] = useState({});
@@ -8,28 +10,24 @@ const TableWithToggle = () => {
   const [totalScore, setTotalScore] = useState(0); // Total score for all categories
 
   useEffect(() => {
-    // Fetch the JSON data when the component mounts
-    fetch('/src/ScoreMapping.json') 
-      .then((response) => response.json())
-      .then((data) => {
-        setJsonData(data);
+    setJsonData(ScoreMapping);
+    // Extract categories dynamically from JSON data
+    const categories = Object.keys(ScoreMapping);
+    const initialTableData = {};
 
-        // Extract categories dynamically from JSON data
-        const categories = Object.keys(data);
-        const initialTableData = {};
-
-        categories.forEach((category) => {
-          initialTableData[category] = {};
-          Object.keys(data[category]).forEach((key) => {
-            initialTableData[category][key] = false;
-          });
-        });
-
-        setTableData(initialTableData);
-      })
-      .catch((error) => {
-        console.error('Error fetching JSON data:', error);
+    categories.forEach((category) => {
+      initialTableData[category] = {};
+      Object.keys(ScoreMapping[category]).forEach((key) => {
+        initialTableData[category][key] = false;
       });
+    });
+
+    //Set initial value
+    initialTableData['基本']['底'] = true;
+    console.log(initialTableData);
+    setTableData(initialTableData);
+
+
   }, []);
 
   const toggleCell = (category, key) => {
@@ -51,12 +49,12 @@ const TableWithToggle = () => {
       clearedTableData[category] = {};
 
       Object.keys(tableData[category]).forEach((key) => {
-        clearedTableData[category][key] = false;
+        clearedTableData[category][key] = (key === '底') ? true : false;
       });
     });
-
+    console.log(clearedTableData);
     setTableData(clearedTableData);
-    setShowClearButton(false); // Hide the Clear button after clearing
+    setShowClearButton(false);
   };
 
   // Calculate the total score when a button is toggled
@@ -82,11 +80,11 @@ const TableWithToggle = () => {
       <h1 className="centered-heading">港式台牌計番器</h1>
       <div className="header-container">
         <h2 className="total-score">番數: {totalScore}</h2>
-        {showClearButton && (
-        <button className="clear-button" onClick={clearToggledCells}>Clear</button>
-      )}
+        {totalScore > 5 && (
+          <button className="clear-button" onClick={clearToggledCells}>Clear</button>
+        )}
       </div>
-      
+
       {Object.keys(jsonData).map((category) => (
         <div key={category}>
           <h3>{category}</h3>
@@ -95,7 +93,13 @@ const TableWithToggle = () => {
               {Object.keys(jsonData[category]).map((key) => (
                 <button
                   key={key}
-                  onClick={() => toggleCell(category, key)}
+                  onClick={() => {
+                    if (key === '底') {
+                      return; // Disable click
+                    }
+                    toggleCell(category, key)
+                  }
+                  }
                   className={tableData[category][key] ? 'button active' : 'button'}
                 >
                   {key}
@@ -105,6 +109,9 @@ const TableWithToggle = () => {
           </div>
         </div>
       ))}
+      <div>
+        <ScrollToTopButton />
+      </div>
     </div>
   );
 };
