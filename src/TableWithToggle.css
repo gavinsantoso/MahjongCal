@@ -1,0 +1,35 @@
+/* TableWithToggle.css */
+.centered-heading {
+  text-align: center;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-button {
+  margin-left: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.total-score {
+  margin-left: 10px;
+}
+
+.table-container {
+  display: flex;
+  border: none;
+  justify-content: center;
+}
+
+.button-container {
+  padding: 10px;
+}
+
+.button {
+  margin: 5px;
+}
