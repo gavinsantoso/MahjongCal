@@ -4,124 +4,306 @@
       "name": "基本",
       "entries": [
         { "key": "底", "display": "底", "value": 5, "defaultToggle": true, "disableClick": true},
-        { "key": "將眼", "display": "將眼", "value": 1, "defaultToggle": false },
-        { "key": "無字", "display": "無字", "value": 1, "defaultToggle": false },
-        { "key": "無/爛花", "display": "無/爛花", "value": 1, "defaultToggle": false },
-        { "key": "正花", "display": "正花", "value": 2, "defaultToggle": false },
-        { "key": "一台花", "display": "一台花", "value": 10, "defaultToggle": false },
-        { "key": "兩台花", "display": "兩台花", "value": 40, "defaultToggle": false },
-        { "key": "小缺五", "display": "小缺五", "value": 5, "defaultToggle": false },
-        { "key": "大缺五", "display": "大缺五", "value": 10, "defaultToggle": false },
-        { "key": "斷么", "display": "斷么", "value": 5, "defaultToggle": false },
-        { "key": "非風位/圈", "display": "非風位/圈", "value": 1, "defaultToggle": false },
-        { "key": "正風位/圈", "display": "正風位/圈", "value": 2, "defaultToggle": false },
-        { "key": "正風位&圈", "display": "正風位&圈", "value": 4, "defaultToggle": false },
-        { "key": "中發白", "display": "中發白", "value": 2, "defaultToggle": false },
-        { "key": "無字花", "display": "無字花", "value": 5, "defaultToggle": false },
+        { "key": "叮", "display": "叮(聽)", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "叮", "value": 5},
+          {"display": "叮即食", "value": 10},
+          {"display": "門清叮", "value": 15},
+          {"display": "門清叮即食", "value": 20},
+          {"display": "地叮", "value": 30},
+          {"display": "天叮", "value": 50}
+        ]},
         { "key": "門清", "display": "門清", "value": 5, "defaultToggle": false },
-        { "key": "明槓", "display": "明槓 (當暗刻)", "value": 1, "defaultToggle": false },
-        { "key": "暗槓", "display": "暗槓 (當暗刻)", "value": 2, "defaultToggle": false },
-        { "key": "假獨", "display": "假獨", "value": 1, "defaultToggle": false },
-        { "key": "獨獨", "display": "獨獨", "value": 2, "defaultToggle": false },
-        { "key": "對碰", "display": "對碰", "value": 1, "defaultToggle": false },
-        { "key": "叮", "display": "叮(聽)", "value": 5, "defaultToggle": false },
-        { "key": "門清叮", "display": "門清叮", "value": 15, "defaultToggle": false },
-        { "key": "地叮", "display": "地叮 (閒家第一隻 無門前)", "value": 30, "defaultToggle": false },
-        { "key": "天叮", "display": "天叮 (無門前)", "value": 50, "defaultToggle": false }
+        { "key": "莊", "display": "莊", "value": 1, "defaultToggle": false,
+          "toggleList": [
+            {"display": "1莊", "value": 1},
+            {"display": "2莊", "value": 3},
+            {"display": "3莊", "value": 5},
+            {"display": "4莊", "value": 7},
+            {"display": "5莊", "value": 9},
+            {"display": "6莊", "value": 11},
+            {"display": "7莊", "value": 13},
+            {"display": "8莊", "value": 15},
+            {"display": "9莊", "value": 17},
+            {"display": "10莊", "value": 19},
+            {"display": "11莊", "value": 21},
+            {"display": "12莊", "value": 23},
+            {"display": "13莊", "value": 25},
+            {"display": "14莊", "value": 27},
+            {"display": "15莊", "value": 29},
+            {"display": "16莊", "value": 31},
+            {"display": "17莊", "value": 33},
+            {"display": "18莊", "value": 35},
+            {"display": "19莊", "value": 37},
+            {"display": "20莊", "value": 39}
+          ]
+        },        
+        { "key": "將眼", "display": "將眼", "value": 1, "defaultToggle": false,
+        "toggleList": [
+          {"display": "將眼x1", "value": 1},
+          {"display": "將眼x2", "value": 2},
+          {"display": "將眼x3", "value": 3},
+          {"display": "將眼x4", "value": 4},
+          {"display": "將眼x5", "value": 5},
+          {"display": "將眼x6", "value": 6},
+          {"display": "將眼x7", "value": 7}
+        ]},
+        { "key": "無字", "display": "無字", "value": 1, "defaultToggle": false },
+        { "key": "無/爛花", "display": "無|爛 花", "value": 1, "defaultToggle": false,
+        "toggleList": [
+          {"display": "無花", "value": 1},
+          {"display": "爛花x1", "value": 1},
+          {"display": "爛花x2", "value": 2},
+          {"display": "爛花x3", "value": 3},
+          {"display": "爛花x4", "value": 4},
+          {"display": "爛花x5", "value": 5},
+          {"display": "爛花x6", "value": 6}
+        ]},
+        { "key": "正花", "display": "正花", "value": 2, "defaultToggle": false,
+        "toggleList": [
+          {"display": "正花", "value": 2},
+          {"display": "正花x2", "value": 4}
+        ]},
+        { "key": "一台花", "display": "一|兩 台花", "value": 10, "defaultToggle": false,
+        "toggleList": [
+          {"display": "一台花", "value": 10},
+          {"display": "兩台花", "value": 40}
+        ]},
+        { "key": "缺五", "display": "小|大 缺五", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "小缺五", "value": 5},
+          {"display": "大缺五", "value": 10}
+        ]},
+        { "key": "斷么", "display": "斷么", "value": 5, "defaultToggle": false },
+        { "key": "缺一門", "display": "缺一門", "value": 5, "defaultToggle": false },
+        { "key": "無字花", "display": "無字花", "value": 5, "defaultToggle": false },
+        { "key": "平糊", "display": "平糊", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "平糊", "value": 5},
+          {"display": "無字花大平糊", "value": 15}
+        ]},
+        { "key": "非風位/圈", "display": "非風 位|圈", "value": 1, "defaultToggle": false,
+        "toggleList": [
+          {"display": "非風 位|圈", "value": 1},
+          {"display": "非風 位|圈 x2", "value": 2},
+          {"display": "非風 位|圈 x3", "value": 3}
+        ]},
+        { "key": "正風位/圈", "display": "正風 位|圈", "value": 2, "defaultToggle": false,
+        "toggleList": [
+          {"display": "正風 位|圈", "value": 2},
+          {"display": "正風 位|圈 x2", "value": 4}
+        ]},
+        { "key": "正風位&圈", "display": "正風 位&圈", "value": 4, "defaultToggle": false,
+        "toggleList": [
+          {"display": "雙番東", "value": 4},
+          {"display": "雙番南", "value": 4},
+          {"display": "雙番西", "value": 4},
+          {"display": "雙番北", "value": 4}
+        ]},
+        { "key": "中發白", "display": "中發白", "value": 2, "defaultToggle": false,
+        "toggleList": [
+          {"display": "中發白", "value": 2},
+          {"display": "中發白x2", "value": 4},
+          {"display": "中發白x3", "value": 6}
+        ]},
+        { "key": "明槓", "display": "明槓 (當暗刻)", "value": 1, "defaultToggle": false,
+        "toggleList": [
+          {"display": "明槓", "value": 1},
+          {"display": "明槓x2", "value": 2},
+          {"display": "明槓x3", "value": 3},
+          {"display": "明槓x4", "value": 4},
+          {"display": "明槓x5", "value": 5}
+        ]},
+        { "key": "暗槓", "display": "暗槓 (當暗刻)", "value": 2, "defaultToggle": false,
+        "toggleList": [
+          {"display": "暗槓", "value": 2},
+          {"display": "暗槓x2", "value": 4},
+          {"display": "暗槓x3", "value": 6},
+          {"display": "暗槓x4", "value": 8},
+          {"display": "暗槓x5", "value": 10}
+        ]},
+        { "key": "獨", "display": "假獨", "value": 1, "defaultToggle": false,
+        "toggleList": [
+          {"display": "假獨", "value": 1},
+          {"display": "獨獨", "value": 2}
+        ]},
+        { "key": "對碰", "display": "對碰", "value": 1, "defaultToggle": false }
       ]
     },
     {
       "name": "食糊",
       "entries": [
-        { "key": "自摸", "display": "自摸", "value": 1, "defaultToggle": false },
-        { "key": "自摸門前", "display": "自摸(門前)", "value": 2, "defaultToggle": false },
-        { "key": "叮即食", "display": "叮即食", "value": 5, "defaultToggle": false },
-        { "key": "花摸", "display": "花摸", "value": 3, "defaultToggle": false },
-        { "key": "花2摸", "display": "花上花摸", "value": 10, "defaultToggle": false },
-        { "key": "花3上摸", "display": "花x3上摸", "value": 30, "defaultToggle": false },
-        { "key": "花4上摸", "display": "花x4上摸", "value": 60, "defaultToggle": false },
-        { "key": "花5上摸", "display": "花>5上摸", "value": 100, "defaultToggle": false },
-        { "key": "搶槓1摸", "display": "(搶)槓摸", "value": 3, "defaultToggle": false },
-        { "key": "搶摃2模", "display": "(搶)摃上摃模", "value": 30, "defaultToggle": false },
-        { "key": "搶摃3模", "display": "(搶)摃x3模", "value": 60, "defaultToggle": false },
-        { "key": "搶摃4模", "display": "(搶)摃>4模", "value": 100, "defaultToggle": false },
-        { "key": "河底撈魚", "display": "河底撈魚", "value": 10, "defaultToggle": false },
-        { "key": "海底撈月", "display": "海底撈月", "value": 20, "defaultToggle": false },
-        { "key": "雙響", "display": "雙響", "value": 5, "defaultToggle": false },
-        { "key": "三響", "display": "三響", "value": 10, "defaultToggle": false },
-        { "key": "反雙響", "display": "反雙響", "value": 10, "defaultToggle": false },
-        { "key": "反三響", "display": "反三響", "value": 20, "defaultToggle": false },
-        { "key": "七子內", "display": "七子內", "value": 30, "defaultToggle": false },
-        { "key": "十子內", "display": "十子內", "value": 15, "defaultToggle": false },
-        { "key": "平糊", "display": "平糊", "value": 5, "defaultToggle": false },
-        { "key": "無字花大平糊", "display": "無字花大平糊", "value": 15, "defaultToggle": false },
-        { "key": "鴨糊", "display": "鴨糊 (自摸雞)", "value": 20, "defaultToggle": false },
-        { "key": "小雞糊", "display": "小雞糊 (有1花)", "value": 20, "defaultToggle": false },
-        { "key": "大雞糊", "display": "大雞糊 (無花)", "value": 30, "defaultToggle": false },
-        { "key": "明樓梯", "display": "明樓梯 (另計步步高)", "value": 30, "defaultToggle": false },
-        { "key": "暗樓梯", "display": "暗樓梯 (另計步步高)", "value": 60, "defaultToggle": false },
+        { "key": "自摸", "display": "自摸", "value": 1, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "自摸", "value": 1},
+          {"display": "自摸門清", "value": 2}
+        ]},
+        { "key": "花摸", "display": "花摸", "value": 3, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "花摸", "value": 3},
+          {"display": "花上花摸", "value": 10},
+          {"display": "花上x3摸", "value": 30},
+          {"display": "花上x4摸", "value": 60},
+          {"display": "花上>5摸", "value": 100}
+        ]},
+        { "key": "搶槓", "display": "(搶)槓摸", "value": 3, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "(搶)槓摸", "value": 3},
+          {"display": "(搶)槓x2摸", "value": 30},
+          {"display": "(搶)槓x3摸", "value": 60},
+          {"display": "(搶)槓>4摸", "value": 100}
+        ]},
+        { "key": "底撈", "display": "河底撈魚 | 海底撈月", "value": 10, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "河底撈魚", "value": 10},
+          {"display": "海底撈月", "value": 20}
+        ]},
+        { "key": "雙響", "display": "雙響", "value": 5, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "雙響", "value": 5},
+          {"display": "反雙響", "value": 10}
+        ]},
+        { "key": "三響", "display": "三響", "value": 10, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "三響", "value": 10},
+          {"display": "反三響", "value": 20}
+        ]},
+        { "key": "七子內", "display": "七|十 子內", "value": 30, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "七子內", "value": 30},
+          {"display": "十子內", "value": 15}
+        ]},
+        { "key": "雞糊", "display": "雞|鴨 糊", "value": 20, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "小雞糊 (1花)", "value": 20},
+          {"display": "大雞糊 (無花)", "value": 30},
+          {"display": "小鴨糊 (1花)", "value": 15},
+          {"display": "大鴨糊 (無花)", "value": 20}
+        ]},
+        { "key": "樓梯", "display": "明|暗 樓梯 (另計步步高)", "value": 30, "defaultToggle": false ,
+        "toggleList": [
+          {"display": "明樓梯", "value": 30},
+          {"display": "暗樓梯", "value": 60}
+        ]},
         { "key": "對對糊", "display": "對對糊", "value": 30, "defaultToggle": false },
         { "key": "混一色", "display": "混一色", "value": 30, "defaultToggle": false },
         { "key": "清一色", "display": "清一色 (不計無字)", "value": 80, "defaultToggle": false },
-        { "key": "全求人", "display": "全求人 (暗槓唔當,明槓可以)", "value": 30, "defaultToggle": false },
-        { "key": "半求人", "display": "半求人", "value": 15, "defaultToggle": false },
-        { "key": "缺一門", "display": "缺一門", "value": 5, "defaultToggle": false },
-        { "key": "小五門齊", "display": "小五門齊", "value": 8, "defaultToggle": false },
-        { "key": "大五門齊", "display": "大五門齊", "value": 10, "defaultToggle": false },
-        { "key": "小七門齊", "display": "小七門齊", "value": 15, "defaultToggle": false },
-        { "key": "大七門齊", "display": "大七門齊", "value": 20, "defaultToggle": false },
-        { "key": "混帶x1", "display": "混帶x(1st)", "value": 20, "defaultToggle": false },
-        { "key": "混帶x2", "display": "混帶x(2nd)", "value": 10, "defaultToggle": false },
-        { "key": "混帶x3", "display": "混帶x(3nd)", "value": 5, "defaultToggle": false },
+        { "key": "全求人", "display": "全求人 (暗槓唔當,明槓可以)", "value": 30, "defaultToggle": false ,
+        "toggleList": [
+            {"display": "全求人", "value": 30},
+            {"display": "半求人", "value": 15}
+        ]},
+        { "key": "門齊", "display": "五|七 門齊", "value": 8, "defaultToggle": false ,
+        "toggleList": [
+            {"display": "小五門齊", "value": 8},
+            {"display": "大五門齊", "value": 10},
+            {"display": "小七門齊", "value": 15},
+            {"display": "大七門齊", "value": 20}
+        ]},
+        { "key": "混帶x", "display": "混帶x", "value": 20, "defaultToggle": false ,
+        "toggleList": [
+            {"display": "混帶x(1隻)", "value": 20},
+            {"display": "混帶x(2隻)", "value": 30},
+            {"display": "混帶x(3隻)", "value": 35}
+        ]},
         { "key": "滿庭芳", "display": "滿庭芳(全帶x)", "value": 60, "defaultToggle": false }
       ]
     },
     {
       "name": "么牌",
       "entries": [
-        { "key": "混帶么", "display": "混帶么 (碰上番子)", "value": 20, "defaultToggle": false },
-        { "key": "全帶么", "display": "全帶么 (碰上無番)", "value": 60, "defaultToggle": false },
-        { "key": "混么", "display": "混么 (刻子未計對對糊)", "value": 50, "defaultToggle": false },
-        { "key": "清么", "display": "清么 (刻子未計對對糊)", "value": 80, "defaultToggle": false }
-      ]
+        { "key": "混帶么", "display": "混|全 帶么 (碰上番子)", "value": 20, "defaultToggle": false ,
+        "toggleList": [
+            {"display": "混帶么", "value": 20},
+            {"display": "全帶么", "value": 60}
+        ]},
+        { "key": "混么", "display": "混|清 么 (刻子未計對對糊)", "value": 50, "defaultToggle": false ,
+        "toggleList": [
+            {"display": "混么", "value": 50},
+            {"display": "清么", "value": 80}
+        ]}
+     ]
     },
     {
       "name": "順子",
       "entries": [
-        { "key": "般高", "display": "般高", "value": 3, "defaultToggle": false, "maxClick": 2, "click": 0},
-        { "key": "三般高", "display": "三般高", "value": 20, "defaultToggle": false },
-        { "key": "四般高", "display": "四般高", "value": 60, "defaultToggle": false },
-        { "key": "相逢", "display": "相逢", "value": 3, "defaultToggle": false },
-        { "key": "三相逢", "display": "三相逢", "value": 10, "defaultToggle": false },
-        { "key": "四同順", "display": "四同順", "value": 40, "defaultToggle": false },
-        { "key": "五同順", "display": "五同順", "value": 80, "defaultToggle": false },
-        { "key": "明雜龍", "display": "明雜龍", "value": 5, "defaultToggle": false },
-        { "key": "暗雜龍", "display": "暗雜龍", "value": 15, "defaultToggle": false },
-        { "key": "明清龍", "display": "明清龍", "value": 10, "defaultToggle": false },
-        { "key": "暗清龍", "display": "暗清龍", "value": 20, "defaultToggle": false },
-        { "key": "明雜步步高", "display": "明雜步步高", "value": 5, "defaultToggle": false },
-        { "key": "暗雜步步高", "display": "暗雜步步高", "value": 10, "defaultToggle": false },
-        { "key": "明清步步高", "display": "明清步步高", "value": 15, "defaultToggle": false },
-        { "key": "暗清步步高", "display": "暗清步步高", "value": 25, "defaultToggle": false },
-        { "key": "明四歸一", "display": "明四歸一", "value": 5, "defaultToggle": false },
-        { "key": "暗四歸一", "display": "暗四歸一", "value": 10, "defaultToggle": false },
-        { "key": "明四歸二", "display": "明四歸二", "value": 10, "defaultToggle": false },
-        { "key": "暗四歸二", "display": "暗四歸二", "value": 15, "defaultToggle": false },
-        { "key": "明四歸四", "display": "明四歸四", "value": 20, "defaultToggle": false },
-        { "key": "暗四歸四", "display": "暗四歸四", "value": 30, "defaultToggle": false },
-        { "key": "老少", "display": "老少", "value": 3, "defaultToggle": false }
+        { "key": "老少", "display": "老少", "value": 3, "defaultToggle": false,
+        "toggleList": [
+            {"display": "老少", "value": 3},
+            {"display": "老少x2", "value": 6},
+            {"display": "老少x3", "value": 9},
+            {"display": "老少x4", "value": 12}
+        ]},
+        { "key": "般高", "display": "般高", "value": 3, "defaultToggle": false,
+        "toggleList": [
+            {"display": "般高", "value": 3},
+            {"display": "般高x2", "value": 6},
+            {"display": "三般高", "value": 20},
+            {"display": "四般高", "value": 60}
+        ]},
+        { "key": "相逢", "display": "相逢", "value": 3, "defaultToggle": false,
+        "toggleList": [
+          {"display": "相逢", "value": 3},
+          {"display": "相逢x2", "value": 3},
+          {"display": "三相逢", "value": 10},
+          {"display": "四同順", "value": 40},
+          {"display": "五同順", "value": 80}
+        ]},
+        { "key": "雜龍", "display": "明|暗 雜龍", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "明雜龍", "value": 5},
+          {"display": "暗雜龍", "value": 15}
+        ]},
+        { "key": "清龍", "display": "明|暗 清龍", "value": 10, "defaultToggle": false,
+        "toggleList": [
+          {"display": "明清龍", "value": 10},
+          {"display": "暗清龍", "value": 20}
+        ]},
+        { "key": "明雜步步高", "display": "明雜步步高", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "明雜步步高", "value": 5},
+          {"display": "明雜步步高x2", "value": 10}
+        ]},
+        { "key": "暗雜步步高", "display": "暗雜步步高", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "暗雜步步高", "value": 10},
+          {"display": "暗雜步步高x2", "value": 20}
+        ]},
+        { "key": "明清步步高", "display": "明清步步高", "defaultToggle": false,
+        "toggleList": [
+          {"display": "明清步步高", "value": 15},
+          {"display": "明清步步高x2", "value": 30}
+        ]},
+        { "key": "暗清步步高", "display": "暗清步步高", "defaultToggle": false,
+        "toggleList": [
+          {"display": "暗清步步高", "value": 25},
+          {"display": "暗清步步高x2", "value": 50}
+        ]},
+        { "key": "四歸", "display": "明|暗 四歸 一|二|四", "value": 5, "defaultToggle": false,
+        "toggleList": [
+          {"display": "明四歸一", "value": 5},
+          {"display": "暗四歸一", "value": 10},
+          {"display": "明四歸二", "value": 10},
+          {"display": "暗四歸二", "value": 15},
+          {"display": "明四歸四", "value": 20},
+          {"display": "暗四歸四", "value": 30}
+        ]}
       ]
     },
     {
       "name": "刻子",
       "entries": [
-        { "key": "兄弟", "display": "兄弟", "value": 5, "defaultToggle": false, 
+        { "key": "老少", "display": "老少", "value": 5, "defaultToggle": false,
+        "toggleList": [
+            {"display": "老少", "value": 5},
+            {"display": "老少x2", "value": 10}
+        ]},
+        { "key": "兄弟", "display": "兄弟", "value": 5, "defaultToggle": false,
         "toggleList": [
             {"display": "兄弟", "value": 5},
             {"display": "小三兄弟", "value": 10},
             {"display": "大三兄弟", "value": 20}
-        ]
-        },
+        ]},
         { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false, 
         "toggleList": [
             {"display": "姊妹", "value": 5},
@@ -132,13 +314,14 @@
             {"display": "小五姊妹", "value": 60},
             {"display": "五姊妹", "value": 80},
             {"display": "六姊妹", "value": 120}
-
-        ] },
-        { "key": "老少", "display": "老少", "value": 5, "defaultToggle": false },
-        { "key": "兩暗刻", "display": "兩暗刻", "value": 5, "defaultToggle": false },
-        { "key": "三暗刻", "display": "三暗刻", "value": 10, "defaultToggle": false },
-        { "key": "四暗刻", "display": "四暗刻", "value": 30, "defaultToggle": false },
-        { "key": "五暗刻", "display": "五暗刻", "value": 80, "defaultToggle": false }
+        ]},
+        { "key": "兩暗刻", "display": "兩暗刻", "value": 5, "defaultToggle": false, 
+        "toggleList": [
+            {"display": "兩暗刻", "value": 5},
+            {"display": "三暗刻", "value": 10},
+            {"display": "四暗刻", "value": 30},
+            {"display": "五暗刻", "value": 80}
+        ]}
       ]
     },
     {
@@ -147,21 +330,42 @@
         { "key": "字一色", "display": "字一色", "value": 120, "defaultToggle": false },
         { "key": "十三么", "display": "十三么", "value": 120, "defaultToggle": false },
         { "key": "坎坎糊", "display": "坎坎糊 (自摸|單吊) 可暗槓", "value": 120, "defaultToggle": false },
-        { "key": "十六不搭", "display": "十六不搭", "value": 40, "defaultToggle": false },
-        { "key": "十六不搭三相逢雜龍", "display": "十六不搭 三相逢 | 雜龍", "value": 60, "defaultToggle": false },
-        { "key": "嚦咕嚦咕", "display": "嚦咕嚦咕", "value": 40, "defaultToggle": false },
-        { "key": "嚦咕嚦咕8飛", "display": "嚦咕嚦咕 8飛", "value": 60, "defaultToggle": false },
-        { "key": "小三風", "display": "小三風", "value": 20, "defaultToggle": false },
-        { "key": "小三元", "display": "小三元", "value": 30, "defaultToggle": false },
-        { "key": "大三風", "display": "大三風", "value": 40, "defaultToggle": false },
-        { "key": "大三元", "display": "大三元", "value": 60, "defaultToggle": false },
-        { "key": "小四喜", "display": "小四喜", "value": 80, "defaultToggle": false },
-        { "key": "大四喜", "display": "大四喜", "value": 120, "defaultToggle": false },
+        { "key": "十六不搭", "display": "十六不搭", "value": 40, "defaultToggle": false, 
+        "toggleList": [
+            {"display": "十六不搭", "value": 40},
+            {"display": "十六不搭 三相逢", "value": 60},
+            {"display": "十六不搭 雜龍", "value": 60}
+        ]},
+        { "key": "嚦咕嚦咕", "display": "嚦咕嚦咕", "value": 40, "defaultToggle": false, 
+        "toggleList": [
+            {"display": "嚦咕嚦咕", "value": 40},
+            {"display": "嚦咕嚦咕 八飛", "value": 60}
+        ]},
+        { "key": "小三風", "display": "小三風", "value": 20, "defaultToggle": false,
+        "toggleList": [
+            {"display": "小三風", "value": 20},
+            {"display": "大三風", "value": 40},
+            {"display": "小四喜", "value": 80},
+            {"display": "大四喜", "value": 120}
+        ]},
+        { "key": "小三元", "display": "小三元", "value": 30, "defaultToggle": false,
+        "toggleList": [
+            {"display": "小三元", "value": 30},
+            {"display": "大三元", "value": 60}
+        ]},
         { "key": "人糊", "display": "人糊 (四子內,包括上碰槓)", "value": 80, "defaultToggle": false },
         { "key": "地糊", "display": "地糊", "value": 120, "defaultToggle": false },
         { "key": "天糊", "display": "天糊", "value": 120, "defaultToggle": false },
-        { "key": "七搶一一搶七", "display": "七搶一 | 一搶七", "value": 30, "defaultToggle": false },
-        { "key": "八仙過海", "display": "八仙過海 (兩食)", "value": 80, "defaultToggle": false }
+        { "key": "七搶一一搶七", "display": "七搶一 | 一搶七", "value": 30, "defaultToggle": false,
+        "toggleList": [
+            {"display": "七搶一", "value": 30},
+            {"display": "一搶七", "value": 30}
+        ]},
+        { "key": "八仙過海", "display": "八仙過海 | 兩食", "value": 80, "defaultToggle": false,
+        "toggleList": [
+            {"display": "八仙過海", "value": 80},
+            {"display": "八仙過海", "value": 160}
+        ]}
       ]
     }
   ]
