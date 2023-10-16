@@ -1,46 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import './TableWithToggle.css'; // Import the CSS file
-import ScoreMapping from './ScoreMapping.json'; // Import your JSON data
-import ScrollToTopButton from './ScrollToTopButton';
+import React, { useState, useEffect } from "react";
+import "./TableWithToggle.css"; // Import the CSS file
+import ScoreMapping from "./ScoreMapping.json"; // Import your JSON data
+import ScrollToTopButton from "./ScrollToTopButton";
 
 const TableWithToggle = () => {
   const [jsonData, setJsonData] = useState({});
   const [tableData, setTableData] = useState({});
+  const [toggleIndices, setToggleIndices] = useState({}); // Keep track of which toggleList item to show
   const [showClearButton, setShowClearButton] = useState(false); // Flag to show/hide the Clear button
   const [totalScore, setTotalScore] = useState(0); // Total score for all categories
 
   //Initial Table Data
   useEffect(() => {
     setJsonData(ScoreMapping);
-    // Extract categories dynamically from JSON data
     const categories = ScoreMapping.categories;
     const initialTableData = {};
+    const initialToggleIndices = {};
 
     categories.forEach((category) => {
       initialTableData[category.name] = {};
       category.entries.forEach((entry) => {
         initialTableData[category.name][entry.key] = entry.defaultToggle;
+        if (entry.toggleList) {
+          initialToggleIndices[entry.key] = -1; // Initial non-toggled state
+        }
       });
     });
-    // Set initial value
+
     setTableData(initialTableData);
+    setToggleIndices(initialToggleIndices);
   }, []);
 
-  const toggleCell = (category, key, toggleValue = null) => {
-    setTableData((prevTableData) => {
-        let updatedCategory = { ...prevTableData[category] };
-        if (toggleValue !== null) {
-            updatedCategory[key] = toggleValue;
-        } else {
-            updatedCategory[key] = !prevTableData[category][key];
-        }
-        return {
-            ...prevTableData,
-            [category]: updatedCategory,
-        };
-    });
+  const toggleCell = (category, key) => {
+    let currentToggleIndex = toggleIndices[key] !== undefined ? toggleIndices[key] : -1;
+    const entry = jsonData.categories
+      .find((c) => c.name === category)
+      .entries.find((e) => e.key === key);
+
+    // If the entry has a toggleList
+    if (entry.toggleList) {
+      currentToggleIndex = (currentToggleIndex + 1) % (entry.toggleList.length + 1);
+      if (currentToggleIndex === entry.toggleList.length) {
+        currentToggleIndex = -1; // Loop back to the initial non-toggled state
+      }
+      setToggleIndices((prevIndices) => ({
+        ...prevIndices,
+        [key]: currentToggleIndex,
+      }));
+
+      const newValue = currentToggleIndex === -1 ? entry.defaultToggle : true;
+      setTableData((prevData) => ({
+        ...prevData,
+        [category]: {
+          ...prevData[category],
+          [key]: newValue,
+        },
+      }));
+    } else {
+      // If the entry does not have a toggleList
+      setTableData((prevData) => ({
+        ...prevData,
+        [category]: {
+          ...prevData[category],
+          [key]: !prevData[category][key],
+        },
+      }));
+    }
     setShowClearButton(true);
 };
+
 
   // Implement the clearToggledCells function
   const clearToggledCells = () => {
@@ -50,7 +78,7 @@ const TableWithToggle = () => {
       clearedTableData[category] = {};
 
       Object.keys(tableData[category]).forEach((key) => {
-        clearedTableData[category][key] = (key === '底') ? true : false;
+        clearedTableData[category][key] = key === "底" ? true : false;
       });
     });
 
@@ -71,7 +99,13 @@ const TableWithToggle = () => {
           if (categoryData) {
             const entry = categoryData.entries.find((e) => e.key === key);
             if (entry) {
-              sum += entry.value;
+              if (entry.toggleList && toggleIndices[key] !== -1) {
+                // If a toggleList item is active, consider its value
+                sum += entry.toggleList[toggleIndices[key]].value;
+              } else {
+                // Otherwise, consider the main entry's value
+                sum += entry.value;
+              }
             }
           }
         }
@@ -102,20 +136,32 @@ const TableWithToggle = () => {
           <h3>{category.name}</h3>
           <div className="table-container">
             <div className="button-container">
-              {category.entries.map((entry) => (
-                <button
-                  key={entry.key}
-                  onClick={() => {
-                    if (entry.disableClick) {
-                      return; // Disable click
+              {category.entries.map((entry) => {
+                const displayText =
+                  entry.toggleList && toggleIndices[entry.key] !== undefined
+                    ? toggleIndices[entry.key] === -1
+                      ? entry.display
+                      : entry.toggleList[toggleIndices[entry.key]].display
+                    : entry.display;
+                return (
+                  <button
+                    key={entry.key}
+                    onClick={() => {
+                      if (entry.disableClick) {
+                        return;
+                      }
+                      toggleCell(category.name, entry.key);
+                    }}
+                    className={
+                      tableData[category.name][entry.key]
+                        ? "button active"
+                        : "button"
                     }
-                    toggleCell(category.name, entry.key);
-                  }}
-                  className={tableData[category.name][entry.key] ? 'button active' : 'button'}
-                >
-                  {entry.display}
-                </button>
-              ))}
+                  >
+                    {displayText}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

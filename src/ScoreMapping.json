@@ -122,8 +122,6 @@
             {"display": "大三兄弟", "value": 20}
         ]
         },
-        { "key": "小三兄弟", "display": "小三兄弟", "value": 10, "defaultToggle": false },
-        { "key": "大三兄弟", "display": "大三兄弟", "value": 20, "defaultToggle": false },
         { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false },
         { "key": "小三姊妹", "display": "小三姊妹", "value": 10, "defaultToggle": false },
         { "key": "三姊妹", "display": "三姊妹", "value": 20, "defaultToggle": false },
