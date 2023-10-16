@@ -73,18 +73,22 @@ const TableWithToggle = () => {
   // Implement the clearToggledCells function
   const clearToggledCells = () => {
     const clearedTableData = {};
+    const initialToggleIndices = {};
 
-    Object.keys(tableData).forEach((category) => {
-      clearedTableData[category] = {};
-
-      Object.keys(tableData[category]).forEach((key) => {
-        clearedTableData[category][key] = key === "底" ? true : false;
-      });
+    jsonData.categories.forEach((category) => {
+        clearedTableData[category.name] = {};
+        category.entries.forEach((entry) => {
+            clearedTableData[category.name][entry.key] = entry.defaultToggle;
+            if (entry.toggleList) {
+                initialToggleIndices[entry.key] = -1; // Initial non-toggled state
+            }
+        });
     });
 
     setTableData(clearedTableData);
+    setToggleIndices(initialToggleIndices);
     setShowClearButton(false);
-  };
+};
 
   // Calculate the total score when a button is toggled
   useEffect(() => {

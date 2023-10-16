@@ -122,14 +122,18 @@
             {"display": "大三兄弟", "value": 20}
         ]
         },
-        { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false },
-        { "key": "小三姊妹", "display": "小三姊妹", "value": 10, "defaultToggle": false },
-        { "key": "三姊妹", "display": "三姊妹", "value": 20, "defaultToggle": false },
-        { "key": "小四姊妹", "display": "小四姊妹", "value": 30, "defaultToggle": false },
-        { "key": "四姊妹", "display": "四姊妹", "value": 40, "defaultToggle": false },
-        { "key": "小五姊妹", "display": "小五姊妹", "value": 60, "defaultToggle": false },
-        { "key": "五姊妹", "display": "五姊妹", "value": 80, "defaultToggle": false },
-        { "key": "六姊妹", "display": "六姊妹", "value": 120, "defaultToggle": false },
+        { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false, 
+        "toggleList": [
+            {"display": "姊妹", "value": 5},
+            {"display": "小三姊妹", "value": 10},
+            {"display": "三姊妹", "value": 20},
+            {"display": "小四姊妹", "value": 30},
+            {"display": "四姊妹", "value": 40},
+            {"display": "小五姊妹", "value": 60},
+            {"display": "五姊妹", "value": 80},
+            {"display": "六姊妹", "value": 120}
+
+        ] },
         { "key": "老少", "display": "老少", "value": 5, "defaultToggle": false },
         { "key": "兩暗刻", "display": "兩暗刻", "value": 5, "defaultToggle": false },
         { "key": "三暗刻", "display": "三暗刻", "value": 10, "defaultToggle": false },
