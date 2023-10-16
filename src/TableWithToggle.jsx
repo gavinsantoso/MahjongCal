@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TableWithToggle.css'; // Import the CSS file
-import ScoreMapping from './ScoreMapping.json';
-import ScrollToTopButton from './ScrollToTopButton'
+import ScoreMapping from './ScoreMapping.json'; // Import your JSON data
+import ScrollToTopButton from './ScrollToTopButton';
 
 const TableWithToggle = () => {
   const [jsonData, setJsonData] = useState({});
@@ -9,37 +9,38 @@ const TableWithToggle = () => {
   const [showClearButton, setShowClearButton] = useState(false); // Flag to show/hide the Clear button
   const [totalScore, setTotalScore] = useState(0); // Total score for all categories
 
+  //Initial Table Data
   useEffect(() => {
     setJsonData(ScoreMapping);
     // Extract categories dynamically from JSON data
-    const categories = Object.keys(ScoreMapping);
+    const categories = ScoreMapping.categories;
     const initialTableData = {};
 
     categories.forEach((category) => {
-      initialTableData[category] = {};
-      Object.keys(ScoreMapping[category]).forEach((key) => {
-        initialTableData[category][key] = false;
+      initialTableData[category.name] = {};
+      category.entries.forEach((entry) => {
+        initialTableData[category.name][entry.key] = entry.defaultToggle;
       });
     });
-
-    //Set initial value
-    initialTableData['基本']['底'] = true;
-    console.log(initialTableData);
+    // Set initial value
     setTableData(initialTableData);
-
-
   }, []);
 
-  const toggleCell = (category, key) => {
-    setTableData((prevTableData) => ({
-      ...prevTableData,
-      [category]: {
-        ...prevTableData[category],
-        [key]: !prevTableData[category][key],
-      },
-    }));
-    setShowClearButton(true); // Show the Clear button when a button is toggled
-  };
+  const toggleCell = (category, key, toggleValue = null) => {
+    setTableData((prevTableData) => {
+        let updatedCategory = { ...prevTableData[category] };
+        if (toggleValue !== null) {
+            updatedCategory[key] = toggleValue;
+        } else {
+            updatedCategory[key] = !prevTableData[category][key];
+        }
+        return {
+            ...prevTableData,
+            [category]: updatedCategory,
+        };
+    });
+    setShowClearButton(true);
+};
 
   // Implement the clearToggledCells function
   const clearToggledCells = () => {
@@ -52,7 +53,7 @@ const TableWithToggle = () => {
         clearedTableData[category][key] = (key === '底') ? true : false;
       });
     });
-    console.log(clearedTableData);
+
     setTableData(clearedTableData);
     setShowClearButton(false);
   };
@@ -63,7 +64,16 @@ const TableWithToggle = () => {
     Object.keys(tableData).forEach((category) => {
       Object.keys(tableData[category]).forEach((key) => {
         if (tableData[category][key]) {
-          sum += jsonData[category][key];
+          // Find the corresponding value in the JSON data
+          const categoryData = jsonData.categories.find(
+            (cat) => cat.name === category
+          );
+          if (categoryData) {
+            const entry = categoryData.entries.find((e) => e.key === key);
+            if (entry) {
+              sum += entry.value;
+            }
+          }
         }
       });
     });
@@ -71,7 +81,7 @@ const TableWithToggle = () => {
   }, [tableData, jsonData]);
 
   // Check if jsonData is loaded before rendering
-  if (!jsonData || !Object.keys(jsonData).length) {
+  if (!jsonData || !jsonData.categories || jsonData.categories.length === 0) {
     return null; // or return an error message or loading indicator
   }
 
@@ -81,28 +91,29 @@ const TableWithToggle = () => {
       <div className="header-container">
         <h2 className="total-score">番數: {totalScore}</h2>
         {totalScore > 5 && (
-          <button className="clear-button" onClick={clearToggledCells}>Clear</button>
+          <button className="clear-button" onClick={clearToggledCells}>
+            Clear
+          </button>
         )}
       </div>
 
-      {Object.keys(jsonData).map((category) => (
-        <div key={category}>
-          <h3>{category}</h3>
+      {jsonData.categories.map((category) => (
+        <div key={category.name}>
+          <h3>{category.name}</h3>
           <div className="table-container">
             <div className="button-container">
-              {Object.keys(jsonData[category]).map((key) => (
+              {category.entries.map((entry) => (
                 <button
-                  key={key}
+                  key={entry.key}
                   onClick={() => {
-                    if (key === '底') {
+                    if (entry.disableClick) {
                       return; // Disable click
                     }
-                    toggleCell(category, key)
-                  }
-                  }
-                  className={tableData[category][key] ? 'button active' : 'button'}
+                    toggleCell(category.name, entry.key);
+                  }}
+                  className={tableData[category.name][entry.key] ? 'button active' : 'button'}
                 >
-                  {key}
+                  {entry.display}
                 </button>
               ))}
             </div>
