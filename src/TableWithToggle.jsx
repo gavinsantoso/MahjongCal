@@ -32,14 +32,16 @@ const TableWithToggle = () => {
   }, []);
 
   const toggleCell = (category, key) => {
-    let currentToggleIndex = toggleIndices[key] !== undefined ? toggleIndices[key] : -1;
+    let currentToggleIndex =
+      toggleIndices[key] !== undefined ? toggleIndices[key] : -1;
     const entry = jsonData.categories
       .find((c) => c.name === category)
       .entries.find((e) => e.key === key);
 
     // If the entry has a toggleList
     if (entry.toggleList) {
-      currentToggleIndex = (currentToggleIndex + 1) % (entry.toggleList.length + 1);
+      currentToggleIndex =
+        (currentToggleIndex + 1) % (entry.toggleList.length + 1);
       if (currentToggleIndex === entry.toggleList.length) {
         currentToggleIndex = -1; // Loop back to the initial non-toggled state
       }
@@ -67,8 +69,7 @@ const TableWithToggle = () => {
       }));
     }
     setShowClearButton(true);
-};
-
+  };
 
   // Implement the clearToggledCells function
   const clearToggledCells = () => {
@@ -76,19 +77,19 @@ const TableWithToggle = () => {
     const initialToggleIndices = {};
 
     jsonData.categories.forEach((category) => {
-        clearedTableData[category.name] = {};
-        category.entries.forEach((entry) => {
-            clearedTableData[category.name][entry.key] = entry.defaultToggle;
-            if (entry.toggleList) {
-                initialToggleIndices[entry.key] = -1; // Initial non-toggled state
-            }
-        });
+      clearedTableData[category.name] = {};
+      category.entries.forEach((entry) => {
+        clearedTableData[category.name][entry.key] = entry.defaultToggle;
+        if (entry.toggleList) {
+          initialToggleIndices[entry.key] = -1; // Initial non-toggled state
+        }
+      });
     });
 
     setTableData(clearedTableData);
     setToggleIndices(initialToggleIndices);
     setShowClearButton(false);
-};
+  };
 
   // Calculate the total score when a button is toggled
   useEffect(() => {
@@ -130,46 +131,53 @@ const TableWithToggle = () => {
         <h2 className="total-score">番數: {totalScore}</h2>
         {totalScore > 5 && (
           <button className="clear-button" onClick={clearToggledCells}>
-            Clear
+            重置
           </button>
         )}
       </div>
 
       {jsonData.categories.map((category) => (
-        <div key={category.name}>
-          <h3>{category.name}</h3>
-          <div className="table-container">
-            <div className="button-container">
-              {category.entries.map((entry) => {
-                const displayText =
-                  entry.toggleList && toggleIndices[entry.key] !== undefined
-                    ? toggleIndices[entry.key] === -1
-                      ? entry.display
-                      : entry.toggleList[toggleIndices[entry.key]].display
-                    : entry.display;
-                return (
-                  <button
-                    key={entry.key}
-                    onClick={() => {
-                      if (entry.disableClick) {
-                        return;
-                      }
-                      toggleCell(category.name, entry.key);
-                    }}
-                    className={
-                      tableData[category.name][entry.key]
-                        ? "button active"
-                        : "button"
-                    }
-                  >
-                    {displayText}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+  <div key={category.name}>
+    <h3>{category.name}</h3>
+    <div className="table-container">
+      {category.rowGroups.map((rowGroup, rowIndex) => (
+        <div key={rowIndex} className="row">
+          {rowGroup.map((entryKey) => {
+            const entry = category.entries.find((entry) => entry.key === entryKey);
+            const displayText =
+              entry.toggleList &&
+              toggleIndices[entry.key] !== undefined
+                ? toggleIndices[entry.key] === -1
+                  ? entry.display
+                  : entry.toggleList[toggleIndices[entry.key]].display
+                : entry.display;
+
+            return (
+              <button
+                key={entry.key}
+                onClick={() => {
+                  if (entry.disableClick) {
+                    return;
+                  }
+                  toggleCell(category.name, entry.key);
+                }}
+                className={
+                  tableData[category.name][entry.key]
+                    ? "button toggle-button active"
+                    : "button toggle-button"
+                }
+              >
+                {displayText}
+              </button>
+            );
+          })}
         </div>
       ))}
+    </div>
+  </div>
+))}
+
+
       <div>
         <ScrollToTopButton />
       </div>

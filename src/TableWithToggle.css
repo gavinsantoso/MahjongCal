@@ -1,3 +1,4 @@
+/* Duplicates Removed */
 /* TableWithToggle.css */
 button {
   border-radius: 8px;
@@ -6,10 +7,24 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin: 5px;
+  margin: 5px 0;
+  background-color: #1a1a1a; /* Moved background-color here from the other button selector */
+}
+
+.toggle-button {
+  width: 100%;
+  flex: 1; /* Equal-width buttons within a row */
+  margin-inline: 5px; /* Adjust the margin between buttons */
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button.active {
+  background-color: #3498db;
+  color: white;
 }
 
 .centered-heading {
@@ -25,30 +40,27 @@ button {
   top: 0;
   z-index: 100;
   background-color: #242424;
-
 }
 
-.clear-button {
+.clear-button,
+.clear-button.visible {
   margin-left: 10px;
   color: white;
   border: none;
   cursor: pointer;
-}
-
-.clear-button.visible {
-  display: inline-block
+  display: inline-block;
 }
 
 .total-score {
   margin-left: 10px;
 }
 
-.table-container {
+.table-container, .row {
   display: flex;
-  border: none;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.button-container {
-  padding: 10px;
+.row {
+  width: 100%;
 }

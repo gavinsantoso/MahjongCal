@@ -13,7 +13,7 @@
           {"display": "地叮", "value": 30},
           {"display": "天叮", "value": 50}
         ]},
-        { "key": "門清", "display": "門清", "value": 5, "defaultToggle": false },
+        { "key": "門清", "display": "門清", "value": 5, "defaultToggle": false, "lineBreak": true },
         { "key": "莊", "display": "莊", "value": 1, "defaultToggle": false,
           "toggleList": [
             {"display": "1莊", "value": 1},
@@ -64,6 +64,7 @@
           {"display": "正花", "value": 2},
           {"display": "正花x2", "value": 4}
         ]},
+        { "key": "無字花", "display": "無字花", "value": 5, "defaultToggle": false },
         { "key": "一台花", "display": "一|兩 台花", "value": 10, "defaultToggle": false,
         "toggleList": [
           {"display": "一台花", "value": 10},
@@ -76,7 +77,6 @@
         ]},
         { "key": "斷么", "display": "斷么", "value": 5, "defaultToggle": false },
         { "key": "缺一門", "display": "缺一門", "value": 5, "defaultToggle": false },
-        { "key": "無字花", "display": "無字花", "value": 5, "defaultToggle": false },
         { "key": "平糊", "display": "平糊", "value": 5, "defaultToggle": false,
         "toggleList": [
           {"display": "平糊", "value": 5},
@@ -127,12 +127,7 @@
           {"display": "假獨", "value": 1},
           {"display": "獨獨", "value": 2}
         ]},
-        { "key": "對碰", "display": "對碰", "value": 1, "defaultToggle": false }
-      ]
-    },
-    {
-      "name": "食糊",
-      "entries": [
+        { "key": "對碰", "display": "對碰", "value": 1, "defaultToggle": false },
         { "key": "自摸", "display": "自摸", "value": 1, "defaultToggle": false ,
         "toggleList": [
           {"display": "自摸", "value": 1},
@@ -207,6 +202,24 @@
             {"display": "混帶x(3隻)", "value": 35}
         ]},
         { "key": "滿庭芳", "display": "滿庭芳(全帶x)", "value": 60, "defaultToggle": false }
+      ],
+      "rowGroups": [
+        ["底", "叮"],
+        ["門清", "莊", "將眼"],
+        ["無字","無/爛花", "正花", "一台花"],
+        ["無字花", "缺一門"],
+        ["缺五", "斷么"],
+        ["平糊", "門齊"],
+        ["非風位/圈", "正風位/圈", "正風位&圈", "中發白"],
+        ["明槓", "暗槓"],
+        ["獨", "對碰"],
+        ["自摸", "花摸", "搶槓"],
+        ["底撈", "雙響", "三響"],
+        ["七子內"],
+        ["雞糊", "樓梯"],
+        ["對對糊", "混一色", "清一色"],
+        ["全求人"],
+        ["混帶x", "滿庭芳"]
       ]
     },
     {
@@ -222,12 +235,15 @@
             {"display": "混么", "value": 50},
             {"display": "清么", "value": 80}
         ]}
+     ],
+     "rowGroups": [
+      ["混么","混帶么"]
      ]
     },
     {
       "name": "順子",
       "entries": [
-        { "key": "老少", "display": "老少", "value": 3, "defaultToggle": false,
+        { "key": "順老少", "display": "老少", "value": 3, "defaultToggle": false,
         "toggleList": [
             {"display": "老少", "value": 3},
             {"display": "老少x2", "value": 6},
@@ -288,12 +304,19 @@
           {"display": "明四歸四", "value": 20},
           {"display": "暗四歸四", "value": 30}
         ]}
+      ],
+      "rowGroups": [
+        ["順老少", "般高", "相逢"],
+        ["雜龍", "清龍"],
+        ["明雜步步高", "暗雜步步高"],
+        ["明清步步高", "暗清步步高"],
+        ["四歸"]
       ]
     },
     {
       "name": "刻子",
       "entries": [
-        { "key": "老少", "display": "老少", "value": 5, "defaultToggle": false,
+        { "key": "刻老少", "display": "老少", "value": 5, "defaultToggle": false,
         "toggleList": [
             {"display": "老少", "value": 5},
             {"display": "老少x2", "value": 10}
@@ -322,6 +345,10 @@
             {"display": "四暗刻", "value": 30},
             {"display": "五暗刻", "value": 80}
         ]}
+      ],
+      "rowGroups": [
+        ["刻老少", "兄弟", "姊妹"],
+        ["兩暗刻"]
       ]
     },
     {
@@ -364,8 +391,15 @@
         { "key": "八仙過海", "display": "八仙過海 | 兩食", "value": 80, "defaultToggle": false,
         "toggleList": [
             {"display": "八仙過海", "value": 80},
-            {"display": "八仙過海", "value": 160}
+            {"display": "八仙過海 兩食", "value": 160}
         ]}
+      ],
+      "rowGroups": [
+        ["字一色", "十三么", "坎坎糊"],
+        ["十六不搭", "嚦咕嚦咕"],
+        ["小三風", "小三元"],
+        ["人糊", "地糊", "天糊"],
+        ["七搶一一搶七", "八仙過海"]
       ]
     }
   ]
