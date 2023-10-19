@@ -64,3 +64,8 @@ button.active {
 .row {
   width: 100%;
 }
+
+.toggle-exclusive-group {
+  display: flex;
+  width: 100%;
+}

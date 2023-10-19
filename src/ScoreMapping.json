@@ -5,13 +5,13 @@
       "entries": [
         { "key": "底", "display": "底", "value": 5, "defaultToggle": true, "disableClick": true},
         { "key": "叮", "display": "叮(聽)", "value": 5, "defaultToggle": false,
-        "toggleList": [
-          {"display": "叮", "value": 5},
-          {"display": "叮即食", "value": 10},
-          {"display": "門清叮", "value": 15},
-          {"display": "門清叮即食", "value": 20},
-          {"display": "地叮", "value": 30},
-          {"display": "天叮", "value": 50}
+        "exclusiveButton": [
+          {"key": "叮_叮", "parentKey": "叮", "display": "叮", "value": 5, "defaultToggle": false},
+          {"key": "叮_叮即食", "parentKey": "叮", "display": "叮即食", "value": 10, "defaultToggle": false},
+          {"key": "叮_門清叮", "parentKey": "叮", "display": "門清叮", "value": 15, "defaultToggle": false},
+          {"key": "叮_門清叮即食", "parentKey": "叮", "display": "門清叮即食", "value": 20, "defaultToggle": false},
+          {"key": "叮_地叮", "parentKey": "叮", "display": "地叮", "value": 30, "defaultToggle": false},
+          {"key": "叮_天叮", "parentKey": "叮", "display": "天叮", "value": 50, "defaultToggle": false}
         ]},
         { "key": "門清", "display": "門清", "value": 5, "defaultToggle": false, "lineBreak": true },
         { "key": "莊", "display": "莊", "value": 1, "defaultToggle": false,
@@ -204,7 +204,8 @@
         { "key": "滿庭芳", "display": "滿庭芳(全帶x)", "value": 60, "defaultToggle": false }
       ],
       "rowGroups": [
-        ["底", "叮"],
+        ["底"],
+        ["叮"],
         ["門清", "莊", "將眼"],
         ["無字","無/爛花", "正花", "一台花"],
         ["無字花", "缺一門"],
@@ -322,10 +323,10 @@
             {"display": "老少x2", "value": 10}
         ]},
         { "key": "兄弟", "display": "兄弟", "value": 5, "defaultToggle": false,
-        "toggleList": [
-            {"display": "兄弟", "value": 5},
-            {"display": "小三兄弟", "value": 10},
-            {"display": "大三兄弟", "value": 20}
+        "exclusiveButton": [
+            {"key": "兄弟_兄弟", "parentKey": "兄弟", "display": "兄弟", "value": 5, "defaultToggle": false},
+            {"key": "兄弟_小三兄弟", "parentKey": "兄弟", "display": "小三兄弟", "value": 10, "defaultToggle": false},
+            {"key": "兄弟_大三兄弟", "parentKey": "兄弟", "display": "大三兄弟", "value": 20, "defaultToggle": false}
         ]},
         { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false, 
         "toggleList": [

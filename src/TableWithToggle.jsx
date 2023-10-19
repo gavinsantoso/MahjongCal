@@ -10,7 +10,7 @@ const TableWithToggle = () => {
   const [showClearButton, setShowClearButton] = useState(false); // Flag to show/hide the Clear button
   const [totalScore, setTotalScore] = useState(0); // Total score for all categories
 
-  //Initial Table Data
+  // Initial Table Data
   useEffect(() => {
     setJsonData(ScoreMapping);
     const categories = ScoreMapping.categories;
@@ -20,9 +20,17 @@ const TableWithToggle = () => {
     categories.forEach((category) => {
       initialTableData[category.name] = {};
       category.entries.forEach((entry) => {
+        //Initial each button toggle state
         initialTableData[category.name][entry.key] = entry.defaultToggle;
         if (entry.toggleList) {
           initialToggleIndices[entry.key] = -1; // Initial non-toggled state
+        }
+
+        // Check if there's a exclusiveButton and add defaultToggle to initialTableData
+        if (entry.exclusiveButton) {
+          entry.exclusiveButton.forEach((button) => {
+            initialTableData[category.name][button.key] = button.defaultToggle;
+          });
         }
       });
     });
@@ -31,12 +39,32 @@ const TableWithToggle = () => {
     setToggleIndices(initialToggleIndices);
   }, []);
 
+  const toggleExclusiveButton = (category, key, parentKey) => {
+    const updatedTableData = { ...tableData };
+    const categoryData = jsonData.categories.find((c) => c.name === category);
+    const entry = categoryData.entries.find((e) => e.key === parentKey);
+
+    // Iterate through the exclusiveButton and update state
+    entry.exclusiveButton.forEach((button) => {
+      if (button.key === key) {
+        // Toggle the button if it's currently untoggled, or untoggle if it's currently toggled
+        updatedTableData[category][button.key] =
+          !updatedTableData[category][button.key];
+      } else {
+        updatedTableData[category][button.key] = false; // Untoggle other buttons in the same group
+      }
+    });
+
+    setTableData(updatedTableData);
+    setShowClearButton(true);
+  };
+
   const toggleCell = (category, key) => {
     let currentToggleIndex =
       toggleIndices[key] !== undefined ? toggleIndices[key] : -1;
-    const entry = jsonData.categories
-      .find((c) => c.name === category)
-      .entries.find((e) => e.key === key);
+
+    const categoryData = jsonData.categories.find((c) => c.name === category);
+    const entry = categoryData.entries.find((e) => e.key === key);
 
     // If the entry has a toggleList
     if (entry.toggleList) {
@@ -59,7 +87,7 @@ const TableWithToggle = () => {
         },
       }));
     } else {
-      // If the entry does not have a toggleList
+      // If the entry does not have a toggleList and toggleGroup
       setTableData((prevData) => ({
         ...prevData,
         [category]: {
@@ -94,13 +122,14 @@ const TableWithToggle = () => {
   // Calculate the total score when a button is toggled
   useEffect(() => {
     let sum = 0;
+
     Object.keys(tableData).forEach((category) => {
       Object.keys(tableData[category]).forEach((key) => {
         if (tableData[category][key]) {
-          // Find the corresponding value in the JSON data
           const categoryData = jsonData.categories.find(
             (cat) => cat.name === category
           );
+
           if (categoryData) {
             const entry = categoryData.entries.find((e) => e.key === key);
             if (entry) {
@@ -111,13 +140,33 @@ const TableWithToggle = () => {
                 // Otherwise, consider the main entry's value
                 sum += entry.value;
               }
+            } else {
+              // Check within exclusiveButton
+              const entryWithinGroup = categoryData.entries.find((e) =>
+                e.exclusiveButton
+                  ? e.exclusiveButton.some(
+                      (groupItem) => groupItem.key === key
+                    )
+                  : false
+              );
+
+              if (entryWithinGroup) {
+                entryWithinGroup.exclusiveButton.forEach((groupItem) => {
+                  if (
+                    groupItem.key === key &&
+                    tableData[category][groupItem.key]
+                  ) {
+                    sum += groupItem.value;
+                  }
+                });
+              }
             }
           }
         }
       });
     });
     setTotalScore(sum);
-  }, [tableData, jsonData]);
+  }, [tableData, jsonData, toggleIndices]);
 
   // Check if jsonData is loaded before rendering
   if (!jsonData || !jsonData.categories || jsonData.categories.length === 0) {
@@ -137,47 +186,77 @@ const TableWithToggle = () => {
       </div>
 
       {jsonData.categories.map((category) => (
-  <div key={category.name}>
-    <h3>{category.name}</h3>
-    <div className="table-container">
-      {category.rowGroups.map((rowGroup, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {rowGroup.map((entryKey) => {
-            const entry = category.entries.find((entry) => entry.key === entryKey);
-            const displayText =
-              entry.toggleList &&
-              toggleIndices[entry.key] !== undefined
-                ? toggleIndices[entry.key] === -1
-                  ? entry.display
-                  : entry.toggleList[toggleIndices[entry.key]].display
-                : entry.display;
+        <div key={category.name}>
+          <h3>{category.name}</h3>
+          <div className="table-container">
+            {category.rowGroups.map((rowGroup, rowIndex) => (
+              <div key={rowIndex} className="row">
+                {rowGroup.map((entryKey) => {
+                  const entry = category.entries.find(
+                    (entry) => entry.key === entryKey
+                  );
 
-            return (
-              <button
-                key={entry.key}
-                onClick={() => {
-                  if (entry.disableClick) {
-                    return;
+                  if (entry.exclusiveButton) {
+                    return (
+                      <div key={entry.key} className="toggle-exclusive-group">
+                        {entry.exclusiveButton.map((button) => (
+                          <button
+                            key={button.key}
+                            onClick={() => {
+                              if (entry.disableClick) {
+                                return;
+                              }
+                              toggleExclusiveButton(
+                                category.name,
+                                button.key,
+                                entry.key
+                              );
+                            }}
+                            className={
+                              tableData[category.name][button.key]
+                                ? "button toggle-button active"
+                                : "button toggle-button"
+                            }
+                          >
+                            {button.display}
+                          </button>
+                        ))}
+                      </div>
+                    );
+                  } else {
+                    // Handle regular buttons
+                    const displayText =
+                      entry.toggleList && toggleIndices[entry.key] !== undefined
+                        ? toggleIndices[entry.key] === -1
+                          ? entry.display
+                          : entry.toggleList[toggleIndices[entry.key]].display
+                        : entry.display;
+
+                    return (
+                      <button
+                        key={entry.key}
+                        onClick={() => {
+                          if (entry.disableClick) {
+                            return;
+                          }
+                          toggleCell(category.name, entry.key);
+                        }}
+                        className={
+                          tableData[category.name][entry.key]
+                            ? "button toggle-button active"
+                            : "button toggle-button"
+                        }
+                      >
+                        {displayText}
+                      </button>
+                    );
                   }
-                  toggleCell(category.name, entry.key);
-                }}
-                className={
-                  tableData[category.name][entry.key]
-                    ? "button toggle-button active"
-                    : "button toggle-button"
-                }
-              >
-                {displayText}
-              </button>
-            );
-          })}
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
-    </div>
-  </div>
-))}
-
-
       <div>
         <ScrollToTopButton />
       </div>
