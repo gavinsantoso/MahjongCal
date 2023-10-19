@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./TableWithToggle.css"; // Import the CSS file
 import ScoreMapping from "./ScoreMapping.json"; // Import your JSON data
 import ScrollToTopButton from "./ScrollToTopButton";
+import ToggleExclusiveGroup from "./ToggleExclusiveGroup";
 
 const TableWithToggle = () => {
   const [jsonData, setJsonData] = useState({});
@@ -38,26 +39,6 @@ const TableWithToggle = () => {
     setTableData(initialTableData);
     setToggleIndices(initialToggleIndices);
   }, []);
-
-  const toggleExclusiveButton = (category, key, parentKey) => {
-    const updatedTableData = { ...tableData };
-    const categoryData = jsonData.categories.find((c) => c.name === category);
-    const entry = categoryData.entries.find((e) => e.key === parentKey);
-
-    // Iterate through the exclusiveButton and update state
-    entry.exclusiveButton.forEach((button) => {
-      if (button.key === key) {
-        // Toggle the button if it's currently untoggled, or untoggle if it's currently toggled
-        updatedTableData[category][button.key] =
-          !updatedTableData[category][button.key];
-      } else {
-        updatedTableData[category][button.key] = false; // Untoggle other buttons in the same group
-      }
-    });
-
-    setTableData(updatedTableData);
-    setShowClearButton(true);
-  };
 
   const toggleCell = (category, key) => {
     let currentToggleIndex =
@@ -144,9 +125,7 @@ const TableWithToggle = () => {
               // Check within exclusiveButton
               const entryWithinGroup = categoryData.entries.find((e) =>
                 e.exclusiveButton
-                  ? e.exclusiveButton.some(
-                      (groupItem) => groupItem.key === key
-                    )
+                  ? e.exclusiveButton.some((groupItem) => groupItem.key === key)
                   : false
               );
 
@@ -198,30 +177,14 @@ const TableWithToggle = () => {
 
                   if (entry.exclusiveButton) {
                     return (
-                      <div key={entry.key} className="toggle-exclusive-group">
-                        {entry.exclusiveButton.map((button) => (
-                          <button
-                            key={button.key}
-                            onClick={() => {
-                              if (entry.disableClick) {
-                                return;
-                              }
-                              toggleExclusiveButton(
-                                category.name,
-                                button.key,
-                                entry.key
-                              );
-                            }}
-                            className={
-                              tableData[category.name][button.key]
-                                ? "button toggle-button active"
-                                : "button toggle-button"
-                            }
-                          >
-                            {button.display}
-                          </button>
-                        ))}
-                      </div>
+                      <ToggleExclusiveGroup
+                        entry={entry}
+                        category={category}
+                        tableData={tableData}
+                        jsonData={jsonData}
+                        setTableData={setTableData}
+                        setShowClearButton={setShowClearButton}
+                      />
                     );
                   } else {
                     // Handle regular buttons

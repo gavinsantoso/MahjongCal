@@ -328,17 +328,22 @@
             {"key": "兄弟_小三兄弟", "parentKey": "兄弟", "display": "小三兄弟", "value": 10, "defaultToggle": false},
             {"key": "兄弟_大三兄弟", "parentKey": "兄弟", "display": "大三兄弟", "value": 20, "defaultToggle": false}
         ]},
-        { "key": "姊妹", "display": "姊妹", "value": 5, "defaultToggle": false, 
-        "toggleList": [
-            {"display": "姊妹", "value": 5},
-            {"display": "小三姊妹", "value": 10},
-            {"display": "三姊妹", "value": 20},
-            {"display": "小四姊妹", "value": 30},
-            {"display": "四姊妹", "value": 40},
-            {"display": "小五姊妹", "value": 60},
-            {"display": "五姊妹", "value": 80},
-            {"display": "六姊妹", "value": 120}
-        ]},
+        {
+          "key": "姊妹",
+          "display": "姊妹",
+          "value": 5,
+          "defaultToggle": false,
+          "exclusiveButton": [
+            { "key": "姊妹_姊妹", "display": "姊妹", "value": 5, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_小三姊妹", "display": "小三姊妹", "value": 10, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_三姊妹", "display": "三姊妹", "value": 20, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_小四姊妹", "display": "小四姊妹", "value": 30, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_四姊妹", "display": "四姊妹", "value": 40, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_小五姊妹", "display": "小五姊妹", "value": 60, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_五姊妹", "display": "五姊妹", "value": 80, "defaultToggle": false, "parentKey": "姊妹" },
+            { "key": "姊妹_六姊妹", "display": "六姊妹", "value": 120, "defaultToggle": false, "parentKey": "姊妹" }
+          ]
+        },         
         { "key": "兩暗刻", "display": "兩暗刻", "value": 5, "defaultToggle": false, 
         "toggleList": [
             {"display": "兩暗刻", "value": 5},
@@ -348,7 +353,9 @@
         ]}
       ],
       "rowGroups": [
-        ["刻老少", "兄弟", "姊妹"],
+        ["刻老少"],
+        ["兄弟"],
+        ["姊妹"],
         ["兩暗刻"]
       ]
     },
